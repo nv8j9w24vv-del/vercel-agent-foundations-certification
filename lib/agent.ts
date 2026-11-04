@@ -1,4 +1,8 @@
-import { ToolLoopAgent } from "ai";
+import {
+  ToolLoopAgent,
+  type InferAgentUIMessage,
+  type UIToolInvocation,
+} from "ai";
 import { searchProducts, getAllCategories, returnOrder, getProductDetails } from "@/lib/tools";
 
 export const shoppingAgent = new ToolLoopAgent({
@@ -42,3 +46,7 @@ export const shoppingAgent = new ToolLoopAgent({
   - Keep replies short and scannable: the useful answer first, then the despair.`,
   tools: { searchProducts, getAllCategories, returnOrder, getProductDetails },
 });
+
+export type ShoppingAgentUIMessage = InferAgentUIMessage<typeof shoppingAgent>;
+export type SearchProductsToolInvocation = UIToolInvocation<typeof searchProducts>;
+export type ProductDetailsToolInvocation = UIToolInvocation<typeof getProductDetails>;
